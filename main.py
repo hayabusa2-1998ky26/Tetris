@@ -20,33 +20,60 @@ def key_down(e):
 def key_up(e):
     global key
     key = ""
+def mino_down():
+    global maps, putting
+    maps[mino1[0]][mino1[1]] = 0
+    maps[mino2[0]][mino2[1]] = 0
+    maps[mino3[0]][mino3[1]] = 0
+    maps[mino4[0]][mino4[1]] = 0
+    serch_y = 1
+    if maps[mino1[0]][mino1[1] + serch_y] == 0 and maps[mino2[0]][mino2[1] + serch_y] == 0 and maps[mino3[0]][mino3[1] + serch_y] == 0 and maps[mino4[0]][mino4[1] + serch_y] == 0:
+        serch_y += 1
+    else:
+        putting = 1
+    mino1[1] = mino1[1] + serch_y - 1
+    mino2[1] = mino2[1] + serch_y - 1
+    mino3[1] = mino3[1] + serch_y - 1
+    mino4[1] = mino4[1] + serch_y - 1
+    maps[mino1[0]][mino1[1]] = mino[i]
+    maps[mino2[0]][mino2[1]] = mino[i]
+    maps[mino3[0]][mino3[1]] = mino[i]
+    maps[mino4[0]][mino4[1]] = mino[i]
+def put():
+    global putting
+    time.sleep(0.1)
+    putting = 0
 def byouga():
     global maps, count1
-    canvas.delete("block")
-    erase()
-    for x in range(12):
-        for y in range(20):
-            base_x = 640 - ookisa * 6 + x*ookisa
-            if maps[x][y] == 9:
-                canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="black", tag="block")
-            if maps[x][y] == 0:
-                canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="gray", tag="block")
-            if maps[x][y] == 1:
-                canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="skyblue", tag="block")
-            if maps[x][y] == 2:
-                canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="yellow", tag="block")
-            if maps[x][y] == 3:
-                canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="green", tag="block")
-            if maps[x][y] == 4:
-                canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="red", tag="block")
-            if maps[x][y] == 5:
-                canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="blue", tag="block")
-            if maps[x][y] == 6:
-                canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="orange", tag="block")
-            if maps[x][y] == 7:
-                canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="purple", tag="block")
-    canvas.update()
-    count1 += 1
+    try:
+        canvas.delete("block")
+        erase()
+        for x in range(12):
+            for y in range(20):
+                base_x = 640 - ookisa * 6 + x*ookisa
+                if maps[x][y] == 9:
+                    canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="black", tag="block")
+                if maps[x][y] == 0:
+                    canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="gray", tag="block")
+                if maps[x][y] == 1:
+                    canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="skyblue", tag="block")
+                if maps[x][y] == 2:
+                    canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="yellow", tag="block")
+                if maps[x][y] == 3:
+                    canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="green", tag="block")
+                if maps[x][y] == 4:
+                    canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="red", tag="block")
+                if maps[x][y] == 5:
+                    canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="blue", tag="block")
+                if maps[x][y] == 6:
+                    canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="orange", tag="block")
+                if maps[x][y] == 7:
+                    canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="purple", tag="block")
+        canvas.update()
+        count1 += 1
+    except:
+        print("Error!")
+        sys.exit()
 def i_mino():
     global mino1, mino2, mino3, mino4, maps
     mino = 1
@@ -127,26 +154,25 @@ def t_mino():
 def nanimosinai():
     aaa = 0
 def erase():
-    global maps
+    global maps, putting
     tates = []
-    for i in range(len(maps[0])):
-        tate = []
-        for j in range(len(maps)):
-            tate.append(maps[j][i])
-        tates.append(tate)
-    for i in reversed(range(len(tates))):
-        if (not 0 in tates[i]) and tates[i][5] != 9:
-            tates[i] = [9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9]
-            for j in reversed(range((len(tates) - (len(tates) - i) - 1))):
-                if tates[j][5] != 9:
-                    tates[j], tates[j - 1] = tates[j - 1], tates[j]
-    print(tates)
-    maps = []
-    for i in range(len(tates[0])):
-        map1 = []
-        for j in range(len(tates)):
-            map1.append(tates[j][i])
-        maps.append(map1)
+    if putting == 1:
+        for i in range(len(maps[0])):
+            tate = []
+            for j in range(len(maps)):
+                tate.append(maps[j][i])
+            tates.append(tate)
+        for i in reversed(range(len(tates))):
+            if (not 0 in tates[i]) and tates[i][5] != 9:
+                tates[i] = [9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9]
+                tates.pop(i)
+                tates.insert(1, [9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9])
+        maps = []
+        for i in range(len(tates[0])):
+            map1 = []
+            for j in range(len(tates)):
+                map1.append(tates[j][i])
+            maps.append(map1)
 ookisa = 40
 maps = [
     [9, 9, 9, 9, 9, 9, 9, 9, 9, 9 ,9, 9, 9, 9, 9, 9, 9, 9, 9, 9],
@@ -165,6 +191,7 @@ maps = [
 game_over = 0
 root.bind("<KeyPress>", key_down)
 root.bind("<KeyRelease>", key_up)
+putting = 0
 while True:
     if game_over == 1:
         break
@@ -174,6 +201,8 @@ while True:
     random.shuffle(mino)
     mino[0] = 1
     for i in range(7):
+        root.after(20, byouga())
+        putting = 0
         stop = 0
         if game_over == 1:
             break
@@ -191,7 +220,12 @@ while True:
             l_mino()
         if mino[i] == 7:
             t_mino()
+        time.sleep(0.02)
+        t_down = time.time()
         while True:
+            if time.time() - t_down > 1:
+                t_down = time.time()
+                mino_down()
             if game_over == 1:
                 break
             while key == "Up":
@@ -217,6 +251,7 @@ while True:
                 maps[mino2[0]][mino2[1]] = mino[i]
                 maps[mino3[0]][mino3[1]] = mino[i]
                 maps[mino4[0]][mino4[1]] = mino[i]
+                putting = 1
                 break
             if key == "Down":
                 maps[mino1[0]][mino1[1]] = 0
@@ -230,6 +265,8 @@ while True:
                 serch_y = 1
                 if maps[mino1[0]][mino1[1] + serch_y] == 0 and maps[mino2[0]][mino2[1] + serch_y] == 0 and maps[mino3[0]][mino3[1] + serch_y] == 0 and maps[mino4[0]][mino4[1] + serch_y] == 0:
                     serch_y += 1
+                else:
+                    putting = 1
                 mino1[1] = mino1[1] + serch_y - 1
                 mino2[1] = mino2[1] + serch_y - 1
                 mino3[1] = mino3[1] + serch_y - 1
@@ -274,7 +311,7 @@ while True:
                 maps[mino2[0]][mino2[1]] = mino[i]
                 maps[mino3[0]][mino3[1]] = mino[i]
                 maps[mino4[0]][mino4[1]] = mino[i]
-        if mino1[1] < 3 or mino2[1] < 3 or mino3[1] < 3 or mino4[1] < 3:
+        if mino1[1] < 2 or mino2[1] < 2 or mino3[1] < 2 or mino4[1] < 2:
             game_over = 1
 byouga()
 print("game over")
