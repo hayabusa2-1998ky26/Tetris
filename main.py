@@ -2,6 +2,7 @@ import tkinter
 import random
 import time
 import _thread
+import sys
 # 画面作成
 version = tkinter.Tcl().eval('info patchlevel')
 root = tkinter.Tk()
@@ -222,10 +223,13 @@ while True:
             t_mino()
         time.sleep(0.02)
         t_down = time.time()
+        putting = 0
         while True:
             if time.time() - t_down > 1:
                 t_down = time.time()
                 mino_down()
+            if putting == 1:
+                break
             if game_over == 1:
                 break
             while key == "Up":
