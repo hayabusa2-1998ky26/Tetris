@@ -49,7 +49,8 @@ def byouga():
     global maps, count1
     try:
         canvas.delete("block")
-        erase()
+        for i in range(4):
+            erase()
         for x in range(12):
             for y in range(20):
                 base_x = 640 - ookisa * 6 + x*ookisa
@@ -194,11 +195,11 @@ def rotate_L():
             mino2_sa_x, mino2_sa_y = mino2[0] - minor[0], mino2[1] - minor[1]
             mino3_sa_x, mino3_sa_y = mino3[0] - minor[0], mino3[1] - minor[1]
             mino4_sa_x, mino4_sa_y = mino4[0] - minor[0], mino4[1] - minor[1]
-        if maps[minor[0] - mino1_sa_y][minor[1] + mino1_sa_x] == 0 and maps[minor[0] - mino2_sa_y][minor[1] + mino2_sa_x] == 0 and maps[minor[0] - mino3_sa_y][minor[1] + mino3_sa_x] == 0 and maps[minor[0] - mino4_sa_y][minor[1] + mino4_sa_x] == 0:
-            mino1[0], mino1[1] = minor[0] - mino1_sa_y, minor[1] + mino1_sa_x
-            mino2[0], mino2[1] = minor[0] - mino2_sa_y, minor[1] + mino2_sa_x
-            mino3[0], mino3[1] = minor[0] - mino3_sa_y, minor[1] + mino3_sa_x
-            mino4[0], mino4[1] = minor[0] - mino4_sa_y, minor[1] + mino4_sa_x
+            if maps[minor[0] - mino1_sa_y][minor[1] + mino1_sa_x] == 0 and maps[minor[0] - mino2_sa_y][minor[1] + mino2_sa_x] == 0 and maps[minor[0] - mino3_sa_y][minor[1] + mino3_sa_x] == 0 and maps[minor[0] - mino4_sa_y][minor[1] + mino4_sa_x] == 0:
+                mino1[0], mino1[1] = minor[0] - mino1_sa_y, minor[1] + mino1_sa_x
+                mino2[0], mino2[1] = minor[0] - mino2_sa_y, minor[1] + mino2_sa_x
+                mino3[0], mino3[1] = minor[0] - mino3_sa_y, minor[1] + mino3_sa_x
+                mino4[0], mino4[1] = minor[0] - mino4_sa_y, minor[1] + mino4_sa_x
     except:
         a = 0
 def rotate_R():
