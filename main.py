@@ -301,7 +301,8 @@ def rotate_R():
     except:
         a = 0
 def hold():
-    global maps, hold_mino, i, mino, mino1, mino2, mino3, mino4, holding
+    global maps, hold_mino, i, mino, mino1, mino2, mino3, mino4, holding, break_
+    break_ = 1
     if holding != i:
         maps[mino1[0]][mino1[1]] = 0
         maps[mino2[0]][mino2[1]] = 0
@@ -313,10 +314,13 @@ def hold():
         mino4[1] = 5
         if hold_mino != "":
             mino[i], hold_mino = hold_mino, mino[i]
+            holding = i
             i -= 1
         else:
             hold_mino = mino[i]
-        holding = i
+            holding = i + 1
+    else:
+        break_ = 0
 size = 40
 maps = [
     [9, 9, 9, 9, 9, 9, 9, 9, 9, 9 ,9, 9, 9, 9, 9, 9, 9, 9, 9, 9],
@@ -478,8 +482,10 @@ while True:
             if key == "x" and key != before_key:
                 rotate_L()
             if key == "c" and key != before_key:
+                break_ = 0
                 hold()
-                break
+                if break_ == 1:
+                    break
         if mino1[1] < 2 or mino2[1] < 2 or mino3[1] < 2 or mino4[1] < 2:
             game_over = 1
 byouga()
