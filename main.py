@@ -374,6 +374,7 @@ while True:
             l_mino()
         if mino[i] == 7:
             t_mino()
+        t_down_lock = 0
         time.sleep(0.02)
         t_down = time.time()
         putting = 0
@@ -421,6 +422,10 @@ while True:
                 serch_y = 1
                 if maps[mino1[0]][mino1[1] + serch_y] == 0 and maps[mino2[0]][mino2[1] + serch_y] == 0 and maps[mino3[0]][mino3[1] + serch_y] == 0 and maps[mino4[0]][mino4[1] + serch_y] == 0:
                     serch_y += 1
+                else:
+                    if t_down_lock != 1:
+                        t_down = time.time()
+                        t_down_lock = 1
                 mino1[1] = mino1[1] + serch_y - 1
                 mino2[1] = mino2[1] + serch_y - 1
                 mino3[1] = mino3[1] + serch_y - 1
