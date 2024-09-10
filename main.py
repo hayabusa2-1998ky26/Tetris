@@ -46,9 +46,10 @@ def put():
     time.sleep(0.1)
     putting = 0
 def byouga():
-    global maps, count1, size, hold_mino
+    global maps, count1, size, hold_mino, next_mino
     try:
         canvas.delete("block")
+        canvas.delete("label")
         for i in range(4):
             erase()
         for x in range(12):
@@ -72,43 +73,82 @@ def byouga():
                     canvas.create_rectangle(base_x, y*size, base_x + size, y*size + size, fill="orange", tag="block")
                 if maps[x][y] == 7:
                     canvas.create_rectangle(base_x, y*size, base_x + size, y*size + size, fill="purple", tag="block")
-        canvas.create_rectangle(640 - size * 6 + -3*size, 3*size, 640 - size * 6, 0, fill="gray", tag="block")
+        canvas.create_rectangle(640 - size * 6 + -3*size, 4*size, 640 - size * 6, 0, fill="gray", tag="block")
+        canvas.create_rectangle(640 - size * -6, 4*size, 640 - size * -9, 0, fill="gray", tag="block")
+        canvas.create_text(640 - size * 7.5, 1*size, text="Hold", font=("HG丸ｺﾞｼｯｸM-PRO",10), tag="label")
+        canvas.create_text(640 - size * -7.5, 1*size, text="Next", font=("HG丸ｺﾞｼｯｸM-PRO",10), tag="label")
         base = 640 - size * 6
         if hold_mino == 1:
-            canvas.create_rectangle(base - 2.0*size, size*1.25, base - 2.5*size, size*1.75, fill="skyblue", tag="block")
-            canvas.create_rectangle(base - 1.5*size, size*1.25, base - 2.0*size, size*1.75, fill="skyblue", tag="block")
-            canvas.create_rectangle(base - 1.0*size, size*1.25, base - 1.5*size, size*1.75, fill="skyblue", tag="block")
-            canvas.create_rectangle(base - 0.5*size, size*1.25, base - 1.0*size, size*1.75, fill="skyblue", tag="block")
+            canvas.create_rectangle(base - 2.0*size, size*2.25, base - 2.5*size, size*2.75, fill="skyblue", tag="block")
+            canvas.create_rectangle(base - 1.5*size, size*2.25, base - 2.0*size, size*2.75, fill="skyblue", tag="block")
+            canvas.create_rectangle(base - 1.0*size, size*2.25, base - 1.5*size, size*2.75, fill="skyblue", tag="block")
+            canvas.create_rectangle(base - 0.5*size, size*2.25, base - 1.0*size, size*2.75, fill="skyblue", tag="block")
         if hold_mino == 2:
-            canvas.create_rectangle(base - 1.5*size, size*1.5, base - 2.0*size, size*2.0, fill="yellow", tag="block")
-            canvas.create_rectangle(base - 1.0*size, size*1.5, base - 1.5*size, size*2.0, fill="yellow", tag="block")
-            canvas.create_rectangle(base - 1.5*size, size*1.0, base - 2.0*size, size*1.5, fill="yellow", tag="block")
-            canvas.create_rectangle(base - 1.0*size, size*1.0, base - 1.5*size, size*1.5, fill="yellow", tag="block")
+            canvas.create_rectangle(base - 1.5*size, size*2.5, base - 2.0*size, size*3.0, fill="yellow", tag="block")
+            canvas.create_rectangle(base - 1.0*size, size*2.5, base - 1.5*size, size*3.0, fill="yellow", tag="block")
+            canvas.create_rectangle(base - 1.5*size, size*2.0, base - 2.0*size, size*2.5, fill="yellow", tag="block")
+            canvas.create_rectangle(base - 1.0*size, size*2.0, base - 1.5*size, size*2.5, fill="yellow", tag="block")
         if hold_mino == 3:
-            canvas.create_rectangle(base - 1.25*size, size*1.5, base - 1.75*size, size*2.0, fill="green", tag="block")
-            canvas.create_rectangle(base - 1.75*size, size*1.5, base - 2.25*size, size*2.0, fill="green", tag="block")
-            canvas.create_rectangle(base - 1.25*size, size*1.0, base - 1.75*size, size*1.5, fill="green", tag="block")
-            canvas.create_rectangle(base - 0.75*size, size*1.0, base - 1.25*size, size*1.5, fill="green", tag="block")
+            canvas.create_rectangle(base - 1.25*size, size*2.5, base - 1.75*size, size*3.0, fill="green", tag="block")
+            canvas.create_rectangle(base - 1.75*size, size*2.5, base - 2.25*size, size*3.0, fill="green", tag="block")
+            canvas.create_rectangle(base - 1.25*size, size*2.0, base - 1.75*size, size*2.5, fill="green", tag="block")
+            canvas.create_rectangle(base - 0.75*size, size*2.0, base - 1.25*size, size*2.5, fill="green", tag="block")
         if hold_mino == 4:
-            canvas.create_rectangle(base - 1.25*size, size*1.5, base - 1.75*size, size*2.0, fill="red", tag="block")
-            canvas.create_rectangle(base - 0.75*size, size*1.5, base - 1.25*size, size*2.0, fill="red", tag="block")
-            canvas.create_rectangle(base - 1.25*size, size*1.0, base - 1.75*size, size*1.5, fill="red", tag="block")
-            canvas.create_rectangle(base - 1.75*size, size*1.0, base - 2.25*size, size*1.5, fill="red", tag="block")
+            canvas.create_rectangle(base - 1.25*size, size*2.5, base - 1.75*size, size*3.0, fill="red", tag="block")
+            canvas.create_rectangle(base - 0.75*size, size*2.5, base - 1.25*size, size*3.0, fill="red", tag="block")
+            canvas.create_rectangle(base - 1.25*size, size*2.0, base - 1.75*size, size*2.5, fill="red", tag="block")
+            canvas.create_rectangle(base - 1.75*size, size*2.0, base - 2.25*size, size*2.5, fill="red", tag="block")
         if hold_mino == 5:
-            canvas.create_rectangle(base - 1.25*size, size*1.5, base - 1.75*size, size*2.0, fill="blue", tag="block")
-            canvas.create_rectangle(base - 1.75*size, size*1.5, base - 2.25*size, size*2.0, fill="blue", tag="block")
-            canvas.create_rectangle(base - 1.75*size, size*1.0, base - 2.25*size, size*1.5, fill="blue", tag="block")
-            canvas.create_rectangle(base - 0.75*size, size*1.5, base - 1.25*size, size*2.0, fill="blue", tag="block")
+            canvas.create_rectangle(base - 1.25*size, size*2.5, base - 1.75*size, size*3.0, fill="blue", tag="block")
+            canvas.create_rectangle(base - 1.75*size, size*2.5, base - 2.25*size, size*3.0, fill="blue", tag="block")
+            canvas.create_rectangle(base - 1.75*size, size*2.0, base - 2.25*size, size*2.5, fill="blue", tag="block")
+            canvas.create_rectangle(base - 0.75*size, size*2.5, base - 1.25*size, size*3.0, fill="blue", tag="block")
         if hold_mino == 6:
-            canvas.create_rectangle(base - 1.25*size, size*1.5, base - 1.75*size, size*2.0, fill="orange", tag="block")
-            canvas.create_rectangle(base - 1.75*size, size*1.5, base - 2.25*size, size*2.0, fill="orange", tag="block")
-            canvas.create_rectangle(base - 0.75*size, size*1.5, base - 1.25*size, size*2.0, fill="orange", tag="block")
-            canvas.create_rectangle(base - 0.75*size, size*1.0, base - 1.25*size, size*1.5, fill="orange", tag="block")
+            canvas.create_rectangle(base - 1.25*size, size*2.5, base - 1.75*size, size*3.0, fill="orange", tag="block")
+            canvas.create_rectangle(base - 1.75*size, size*2.5, base - 2.25*size, size*3.0, fill="orange", tag="block")
+            canvas.create_rectangle(base - 0.75*size, size*2.5, base - 1.25*size, size*3.0, fill="orange", tag="block")
+            canvas.create_rectangle(base - 0.75*size, size*2.0, base - 1.25*size, size*2.5, fill="orange", tag="block")
         if hold_mino == 7:
-            canvas.create_rectangle(base - 1.25*size, size*1.5, base - 1.75*size, size*2.0, fill="purple", tag="block")
-            canvas.create_rectangle(base - 1.75*size, size*1.5, base - 2.25*size, size*2.0, fill="purple", tag="block")
-            canvas.create_rectangle(base - 0.75*size, size*1.5, base - 1.25*size, size*2.0, fill="purple", tag="block")
-            canvas.create_rectangle(base - 1.25*size, size*1.0, base - 1.75*size, size*1.5, fill="purple", tag="block")
+            canvas.create_rectangle(base - 1.25*size, size*2.5, base - 1.75*size, size*3.0, fill="purple", tag="block")
+            canvas.create_rectangle(base - 1.75*size, size*2.5, base - 2.25*size, size*3.0, fill="purple", tag="block")
+            canvas.create_rectangle(base - 0.75*size, size*2.5, base - 1.25*size, size*3.0, fill="purple", tag="block")
+            canvas.create_rectangle(base - 1.25*size, size*2.0, base - 1.75*size, size*2.5, fill="purple", tag="block")
+        base = 640 - size * -9
+        if next_mino == 1:
+            canvas.create_rectangle(base - 2.0*size, size*2.25, base - 2.5*size, size*2.75, fill="skyblue", tag="block")
+            canvas.create_rectangle(base - 1.5*size, size*2.25, base - 2.0*size, size*2.75, fill="skyblue", tag="block")
+            canvas.create_rectangle(base - 1.0*size, size*2.25, base - 1.5*size, size*2.75, fill="skyblue", tag="block")
+            canvas.create_rectangle(base - 0.5*size, size*2.25, base - 1.0*size, size*2.75, fill="skyblue", tag="block")
+        if next_mino == 2:
+            canvas.create_rectangle(base - 1.5*size, size*2.5, base - 2.0*size, size*3.0, fill="yellow", tag="block")
+            canvas.create_rectangle(base - 1.0*size, size*2.5, base - 1.5*size, size*3.0, fill="yellow", tag="block")
+            canvas.create_rectangle(base - 1.5*size, size*2.0, base - 2.0*size, size*2.5, fill="yellow", tag="block")
+            canvas.create_rectangle(base - 1.0*size, size*2.0, base - 1.5*size, size*2.5, fill="yellow", tag="block")
+        if next_mino == 3:
+            canvas.create_rectangle(base - 1.25*size, size*2.5, base - 1.75*size, size*3.0, fill="green", tag="block")
+            canvas.create_rectangle(base - 1.75*size, size*2.5, base - 2.25*size, size*3.0, fill="green", tag="block")
+            canvas.create_rectangle(base - 1.25*size, size*2.0, base - 1.75*size, size*2.5, fill="green", tag="block")
+            canvas.create_rectangle(base - 0.75*size, size*2.0, base - 1.25*size, size*2.5, fill="green", tag="block")
+        if next_mino == 4:
+            canvas.create_rectangle(base - 1.25*size, size*2.5, base - 1.75*size, size*3.0, fill="red", tag="block")
+            canvas.create_rectangle(base - 0.75*size, size*2.5, base - 1.25*size, size*3.0, fill="red", tag="block")
+            canvas.create_rectangle(base - 1.25*size, size*2.0, base - 1.75*size, size*2.5, fill="red", tag="block")
+            canvas.create_rectangle(base - 1.75*size, size*2.0, base - 2.25*size, size*2.5, fill="red", tag="block")
+        if next_mino == 5:
+            canvas.create_rectangle(base - 1.25*size, size*2.5, base - 1.75*size, size*3.0, fill="blue", tag="block")
+            canvas.create_rectangle(base - 1.75*size, size*2.5, base - 2.25*size, size*3.0, fill="blue", tag="block")
+            canvas.create_rectangle(base - 1.75*size, size*2.0, base - 2.25*size, size*2.5, fill="blue", tag="block")
+            canvas.create_rectangle(base - 0.75*size, size*2.5, base - 1.25*size, size*3.0, fill="blue", tag="block")
+        if next_mino == 6:
+            canvas.create_rectangle(base - 1.25*size, size*2.5, base - 1.75*size, size*3.0, fill="orange", tag="block")
+            canvas.create_rectangle(base - 1.75*size, size*2.5, base - 2.25*size, size*3.0, fill="orange", tag="block")
+            canvas.create_rectangle(base - 0.75*size, size*2.5, base - 1.25*size, size*3.0, fill="orange", tag="block")
+            canvas.create_rectangle(base - 0.75*size, size*2.0, base - 1.25*size, size*2.5, fill="orange", tag="block")
+        if next_mino == 7:
+            canvas.create_rectangle(base - 1.25*size, size*2.5, base - 1.75*size, size*3.0, fill="purple", tag="block")
+            canvas.create_rectangle(base - 1.75*size, size*2.5, base - 2.25*size, size*3.0, fill="purple", tag="block")
+            canvas.create_rectangle(base - 0.75*size, size*2.5, base - 1.25*size, size*3.0, fill="purple", tag="block")
+            canvas.create_rectangle(base - 1.25*size, size*2.0, base - 1.75*size, size*2.5, fill="purple", tag="block")
         canvas.update()
         count1 += 1
     except:
@@ -298,6 +338,7 @@ root.bind("<KeyRelease>", key_up)
 putting = 0
 minor = []
 hold_mino = ""
+next_mino = ""
 holding = -1
 while True:
     if game_over == 1:
@@ -349,6 +390,7 @@ while True:
                 root.after(20, byouga())
             fps1 = time.time()
             root.after(20, byouga())
+            next_mino = mino[i + 1]
             if key == "Up":
                 maps[mino1[0]][mino1[1]] = 0
                 maps[mino2[0]][mino2[1]] = 0
