@@ -46,32 +46,69 @@ def put():
     time.sleep(0.1)
     putting = 0
 def byouga():
-    global maps, count1
+    global maps, count1, size, hold_mino
     try:
         canvas.delete("block")
         for i in range(4):
             erase()
         for x in range(12):
             for y in range(20):
-                base_x = 640 - ookisa * 6 + x*ookisa
+                base_x = 640 - size * 6 + x*size
                 if maps[x][y] == 9:
-                    canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="black", tag="block")
+                    canvas.create_rectangle(base_x, y*size, base_x + size, y*size + size, fill="black", tag="block")
                 if maps[x][y] == 0:
-                    canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="gray", tag="block")
+                    canvas.create_rectangle(base_x, y*size, base_x + size, y*size + size, fill="gray", tag="block")
                 if maps[x][y] == 1:
-                    canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="skyblue", tag="block")
+                    canvas.create_rectangle(base_x, y*size, base_x + size, y*size + size, fill="skyblue", tag="block")
                 if maps[x][y] == 2:
-                    canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="yellow", tag="block")
+                    canvas.create_rectangle(base_x, y*size, base_x + size, y*size + size, fill="yellow", tag="block")
                 if maps[x][y] == 3:
-                    canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="green", tag="block")
+                    canvas.create_rectangle(base_x, y*size, base_x + size, y*size + size, fill="green", tag="block")
                 if maps[x][y] == 4:
-                    canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="red", tag="block")
+                    canvas.create_rectangle(base_x, y*size, base_x + size, y*size + size, fill="red", tag="block")
                 if maps[x][y] == 5:
-                    canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="blue", tag="block")
+                    canvas.create_rectangle(base_x, y*size, base_x + size, y*size + size, fill="blue", tag="block")
                 if maps[x][y] == 6:
-                    canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="orange", tag="block")
+                    canvas.create_rectangle(base_x, y*size, base_x + size, y*size + size, fill="orange", tag="block")
                 if maps[x][y] == 7:
-                    canvas.create_rectangle(base_x, y*ookisa, base_x + ookisa, y*ookisa + ookisa, fill="purple", tag="block")
+                    canvas.create_rectangle(base_x, y*size, base_x + size, y*size + size, fill="purple", tag="block")
+        canvas.create_rectangle(640 - size * 6 + -3*size, 3*size, 640 - size * 6, 0, fill="gray", tag="block")
+        base = 640 - size * 6
+        if hold_mino == 1:
+            canvas.create_rectangle(base - 2.0*size, size*1.25, base - 2.5*size, size*1.75, fill="skyblue", tag="block")
+            canvas.create_rectangle(base - 1.5*size, size*1.25, base - 2.0*size, size*1.75, fill="skyblue", tag="block")
+            canvas.create_rectangle(base - 1.0*size, size*1.25, base - 1.5*size, size*1.75, fill="skyblue", tag="block")
+            canvas.create_rectangle(base - 0.5*size, size*1.25, base - 1.0*size, size*1.75, fill="skyblue", tag="block")
+        if hold_mino == 2:
+            canvas.create_rectangle(base - 1.5*size, size*1.5, base - 2.0*size, size*2.0, fill="yellow", tag="block")
+            canvas.create_rectangle(base - 1.0*size, size*1.5, base - 1.5*size, size*2.0, fill="yellow", tag="block")
+            canvas.create_rectangle(base - 1.5*size, size*1.0, base - 2.0*size, size*1.5, fill="yellow", tag="block")
+            canvas.create_rectangle(base - 1.0*size, size*1.0, base - 1.5*size, size*1.5, fill="yellow", tag="block")
+        if hold_mino == 3:
+            canvas.create_rectangle(base - 1.25*size, size*1.5, base - 1.75*size, size*2.0, fill="green", tag="block")
+            canvas.create_rectangle(base - 1.75*size, size*1.5, base - 2.25*size, size*2.0, fill="green", tag="block")
+            canvas.create_rectangle(base - 1.25*size, size*1.0, base - 1.75*size, size*1.5, fill="green", tag="block")
+            canvas.create_rectangle(base - 0.75*size, size*1.0, base - 1.25*size, size*1.5, fill="green", tag="block")
+        if hold_mino == 4:
+            canvas.create_rectangle(base - 1.25*size, size*1.5, base - 1.75*size, size*2.0, fill="red", tag="block")
+            canvas.create_rectangle(base - 0.75*size, size*1.5, base - 1.25*size, size*2.0, fill="red", tag="block")
+            canvas.create_rectangle(base - 1.25*size, size*1.0, base - 1.75*size, size*1.5, fill="red", tag="block")
+            canvas.create_rectangle(base - 1.75*size, size*1.0, base - 2.25*size, size*1.5, fill="red", tag="block")
+        if hold_mino == 5:
+            canvas.create_rectangle(base - 1.25*size, size*1.5, base - 1.75*size, size*2.0, fill="blue", tag="block")
+            canvas.create_rectangle(base - 1.75*size, size*1.5, base - 2.25*size, size*2.0, fill="blue", tag="block")
+            canvas.create_rectangle(base - 1.75*size, size*1.0, base - 2.25*size, size*1.5, fill="blue", tag="block")
+            canvas.create_rectangle(base - 0.75*size, size*1.5, base - 1.25*size, size*2.0, fill="blue", tag="block")
+        if hold_mino == 6:
+            canvas.create_rectangle(base - 1.25*size, size*1.5, base - 1.75*size, size*2.0, fill="orange", tag="block")
+            canvas.create_rectangle(base - 1.75*size, size*1.5, base - 2.25*size, size*2.0, fill="orange", tag="block")
+            canvas.create_rectangle(base - 0.75*size, size*1.5, base - 1.25*size, size*2.0, fill="orange", tag="block")
+            canvas.create_rectangle(base - 0.75*size, size*1.0, base - 1.25*size, size*1.5, fill="orange", tag="block")
+        if hold_mino == 7:
+            canvas.create_rectangle(base - 1.25*size, size*1.5, base - 1.75*size, size*2.0, fill="purple", tag="block")
+            canvas.create_rectangle(base - 1.75*size, size*1.5, base - 2.25*size, size*2.0, fill="purple", tag="block")
+            canvas.create_rectangle(base - 0.75*size, size*1.5, base - 1.25*size, size*2.0, fill="purple", tag="block")
+            canvas.create_rectangle(base - 1.25*size, size*1.0, base - 1.75*size, size*1.5, fill="purple", tag="block")
         canvas.update()
         count1 += 1
     except:
@@ -200,6 +237,7 @@ def rotate_L():
                 mino2[0], mino2[1] = minor[0] - mino2_sa_y, minor[1] + mino2_sa_x
                 mino3[0], mino3[1] = minor[0] - mino3_sa_y, minor[1] + mino3_sa_x
                 mino4[0], mino4[1] = minor[0] - mino4_sa_y, minor[1] + mino4_sa_x
+                byouga()
     except:
         a = 0
 def rotate_R():
@@ -219,9 +257,27 @@ def rotate_R():
             mino2[0], mino2[1] = minor[0] + mino2_sa_y, minor[1] - mino2_sa_x
             mino3[0], mino3[1] = minor[0] + mino3_sa_y, minor[1] - mino3_sa_x
             mino4[0], mino4[1] = minor[0] + mino4_sa_y, minor[1] - mino4_sa_x
+            byouga()
     except:
         a = 0
-ookisa = 40
+def hold():
+    global maps, hold_mino, i, mino, mino1, mino2, mino3, mino4, holding
+    if holding != i:
+        maps[mino1[0]][mino1[1]] = 0
+        maps[mino2[0]][mino2[1]] = 0
+        maps[mino3[0]][mino3[1]] = 0
+        maps[mino4[0]][mino4[1]] = 0
+        mino1[1] = 5
+        mino2[1] = 5
+        mino3[1] = 5
+        mino4[1] = 5
+        if hold_mino != "":
+            mino[i], hold_mino = hold_mino, mino[i]
+            i -= 1
+        else:
+            hold_mino = mino[i]
+        holding = i
+size = 40
 maps = [
     [9, 9, 9, 9, 9, 9, 9, 9, 9, 9 ,9, 9, 9, 9, 9, 9, 9, 9, 9, 9],
     [9, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0, 0, 0, 0, 0, 0, 0, 9],
@@ -241,6 +297,8 @@ root.bind("<KeyPress>", key_down)
 root.bind("<KeyRelease>", key_up)
 putting = 0
 minor = []
+hold_mino = ""
+holding = -1
 while True:
     if game_over == 1:
         break
@@ -248,7 +306,14 @@ while True:
     serch_x = 0
     mino = [1, 2, 3, 4, 5, 6, 7]
     random.shuffle(mino)
-    for i in range(7):
+    i = -1
+    while True:
+        i += 1
+        if len(mino) - i < 5:
+            mino_ = [1, 2, 3, 4, 5, 6, 7]
+            random.shuffle(mino_)
+            for j in range(7):
+                mino.append(mino_[j])
         root.after(20, byouga())
         putting = 0
         stop = 0
@@ -314,8 +379,6 @@ while True:
                 serch_y = 1
                 if maps[mino1[0]][mino1[1] + serch_y] == 0 and maps[mino2[0]][mino2[1] + serch_y] == 0 and maps[mino3[0]][mino3[1] + serch_y] == 0 and maps[mino4[0]][mino4[1] + serch_y] == 0:
                     serch_y += 1
-                else:
-                    putting = 1
                 mino1[1] = mino1[1] + serch_y - 1
                 mino2[1] = mino2[1] + serch_y - 1
                 mino3[1] = mino3[1] + serch_y - 1
@@ -367,6 +430,9 @@ while True:
                 rotate_R()
             if key == "x" and key != before_key:
                 rotate_L()
+            if key == "c" and key != before_key:
+                hold()
+                break
         if mino1[1] < 2 or mino2[1] < 2 or mino3[1] < 2 or mino4[1] < 2:
             game_over = 1
 byouga()
