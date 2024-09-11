@@ -22,7 +22,7 @@ def key_up(e):
     global key
     key = ""
 def mino_down():
-    global maps, putting, minor
+    global maps, putting, minor, mino1, mino2, mino3, mino4, minor, i, mino
     maps[mino1[0]][mino1[1]] = 0
     maps[mino2[0]][mino2[1]] = 0
     maps[mino3[0]][mino3[1]] = 0
@@ -45,12 +45,12 @@ def put():
     global putting
     time.sleep(0.1)
     putting = 0
-def byouga():
-    global maps, count1, size, hold_mino, next_mino
+def byouga(mino1, mino2, mino3, mino4, maps_kotei):
+    global maps, count1, size, hold_mino, next_mino, mino, i
     try:
         canvas.delete("block")
         canvas.delete("label")
-        for i in range(4):
+        for k in range(4):
             erase()
         for x in range(12):
             for y in range(20):
@@ -149,6 +149,52 @@ def byouga():
             canvas.create_rectangle(base - 1.75*size, size*2.5, base - 2.25*size, size*3.0, fill="purple", tag="block")
             canvas.create_rectangle(base - 0.75*size, size*2.5, base - 1.25*size, size*3.0, fill="purple", tag="block")
             canvas.create_rectangle(base - 1.25*size, size*2.0, base - 1.75*size, size*2.5, fill="purple", tag="block")
+        try:
+            serch_y = 0
+            while True:
+                if i == 0:
+                    if (maps_kotei[mino1[0]][mino1[1] + serch_y] == 0 or maps_kotei[mino2[0]][mino2[1] + serch_y] == mino[i]) and (maps_kotei[mino2[0]][mino2[1] + serch_y] == 0 or maps_kotei[mino2[0]][mino2[1] + serch_y] == mino[i]) and (maps_kotei[mino3[0]][mino3[1] + serch_y] == 0 or maps_kotei[mino3[0]][mino3[1] + serch_y] == mino[i]) and (maps_kotei[mino4[0]][mino4[1] + serch_y] == 0 or maps_kotei[mino4[0]][mino4[1] + serch_y] == mino[i]):
+                        serch_y += 1
+                    else:
+                        break
+                else:
+                    if maps_kotei[mino1[0]][mino1[1] + serch_y] == 0 and maps_kotei[mino2[0]][mino2[1] + serch_y] == 0 and maps_kotei[mino3[0]][mino3[1] + serch_y] == 0 and maps_kotei[mino4[0]][mino4[1] + serch_y] == 0:
+                        serch_y += 1
+                    else:
+                        break
+            mino1g = list(tuple(mino1))
+            mino2g = list(tuple(mino2))
+            mino3g = list(tuple(mino3))
+            mino4g = list(tuple(mino4))
+            mino1g[1] = mino1[1] + serch_y - 1
+            mino2g[1] = mino2[1] + serch_y - 1
+            mino3g[1] = mino3[1] + serch_y - 1
+            mino4g[1] = mino4[1] + serch_y - 1
+            x = [mino1g[0], mino2g[0], mino3g[0], mino4g[0]]
+            y = [mino1g[1], mino2g[1], mino3g[1], mino4g[1]]
+            j = i
+            for k in range(4):
+                base_x = 640 - size * 6 + x[k]*size
+                if mino[j] == 9:
+                    canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="black4", tag="block")
+                if mino[j] == 0:
+                    canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="gray4", tag="block")
+                if mino[j] == 1:
+                    canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="skyblue4", tag="block")
+                if mino[j] == 2:
+                    canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="yellow4", tag="block")
+                if mino[j] == 3:
+                    canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="green4", tag="block")
+                if mino[j] == 4:
+                    canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="red4", tag="block")
+                if mino[j] == 5:
+                    canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="blue4", tag="block")
+                if mino[j] == 6:
+                    canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="orange4", tag="block")
+                if mino[j] == 7:
+                    canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="purple4", tag="block")
+        except:
+            a = 0
         canvas.update()
         count1 += 1
     except:
@@ -241,7 +287,7 @@ def t_mino():
 def nanimosinai():
     aaa = 0
 def erase():
-    global maps, putting, minor
+    global maps, putting, minor, maps_kotei
     tates = []
     if putting == 1:
         for i in range(len(maps[0])):
@@ -277,7 +323,7 @@ def rotate_L():
                 mino2[0], mino2[1] = minor[0] - mino2_sa_y, minor[1] + mino2_sa_x
                 mino3[0], mino3[1] = minor[0] - mino3_sa_y, minor[1] + mino3_sa_x
                 mino4[0], mino4[1] = minor[0] - mino4_sa_y, minor[1] + mino4_sa_x
-                byouga()
+                byouga(mino1, mino2, mino3, mino4, maps_kotei)
     except:
         a = 0
 def rotate_R():
@@ -297,7 +343,7 @@ def rotate_R():
             mino2[0], mino2[1] = minor[0] + mino2_sa_y, minor[1] - mino2_sa_x
             mino3[0], mino3[1] = minor[0] + mino3_sa_y, minor[1] - mino3_sa_x
             mino4[0], mino4[1] = minor[0] + mino4_sa_y, minor[1] - mino4_sa_x
-            byouga()
+            byouga(mino1, mino2, mino3, mino4, maps_kotei)
     except:
         a = 0
 def hold():
@@ -344,6 +390,7 @@ minor = []
 hold_mino = ""
 next_mino = ""
 holding = -1
+break_ = 0
 while True:
     if game_over == 1:
         break
@@ -359,7 +406,12 @@ while True:
             random.shuffle(mino_)
             for j in range(7):
                 mino.append(mino_[j])
-        root.after(20, byouga())
+        if break_ != 1:
+            maps_kotei = maps.copy()
+            root.after(20, byouga(mino1, mino2, mino3, mino4, maps_kotei))
+            maps_kotei = maps.copy()
+            root.after(20, byouga(mino1, mino2, mino3, mino4, maps_kotei))
+        break_ = 0
         putting = 0
         stop = 0
         if game_over == 1:
@@ -392,9 +444,9 @@ while True:
             if game_over == 1:
                 break
             while key == "Up":
-                root.after(20, byouga())
+                root.after(20, byouga(mino1, mino2, mino3, mino4, maps_kotei))
             fps1 = time.time()
-            root.after(20, byouga())
+            root.after(20, byouga(mino1, mino2, mino3, mino4, maps_kotei))
             next_mino = mino[i + 1]
             if key == "Up":
                 maps[mino1[0]][mino1[1]] = 0
@@ -488,5 +540,5 @@ while True:
                     break
         if mino1[1] < 2 or mino2[1] < 2 or mino3[1] < 2 or mino4[1] < 2:
             game_over = 1
-byouga()
+byouga(mino1, mino2, mino3, mino4, maps_kotei)
 print("game over")
