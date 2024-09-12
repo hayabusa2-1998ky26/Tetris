@@ -153,7 +153,7 @@ def byouga(mino1, mino2, mino3, mino4, maps_kotei):
             serch_y = 0
             while True:
                 if i == 0:
-                    if (maps_kotei[mino1[0]][mino1[1] + serch_y] == 0 or maps_kotei[mino2[0]][mino2[1] + serch_y] == mino[i]) and (maps_kotei[mino2[0]][mino2[1] + serch_y] == 0 or maps_kotei[mino2[0]][mino2[1] + serch_y] == mino[i]) and (maps_kotei[mino3[0]][mino3[1] + serch_y] == 0 or maps_kotei[mino3[0]][mino3[1] + serch_y] == mino[i]) and (maps_kotei[mino4[0]][mino4[1] + serch_y] == 0 or maps_kotei[mino4[0]][mino4[1] + serch_y] == mino[i]):
+                    if (maps_kotei[mino1[0]][mino1[1] + serch_y] == 0 or maps_kotei[mino1[0]][mino1[1] + serch_y] == mino[i]) and (maps_kotei[mino2[0]][mino2[1] + serch_y] == 0 or maps_kotei[mino2[0]][mino2[1] + serch_y] == mino[i]) and (maps_kotei[mino3[0]][mino3[1] + serch_y] == 0 or maps_kotei[mino3[0]][mino3[1] + serch_y] == mino[i]) and (maps_kotei[mino4[0]][mino4[1] + serch_y] == 0 or maps_kotei[mino4[0]][mino4[1] + serch_y] == mino[i]):
                         serch_y += 1
                     else:
                         break
@@ -174,25 +174,26 @@ def byouga(mino1, mino2, mino3, mino4, maps_kotei):
             y = [mino1g[1], mino2g[1], mino3g[1], mino4g[1]]
             j = i
             for k in range(4):
-                base_x = 640 - size * 6 + x[k]*size
-                if mino[j] == 9:
-                    canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="black4", tag="block")
-                if mino[j] == 0:
-                    canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="gray4", tag="block")
-                if mino[j] == 1:
-                    canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="skyblue4", tag="block")
-                if mino[j] == 2:
-                    canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="yellow4", tag="block")
-                if mino[j] == 3:
-                    canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="green4", tag="block")
-                if mino[j] == 4:
-                    canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="red4", tag="block")
-                if mino[j] == 5:
-                    canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="blue4", tag="block")
-                if mino[j] == 6:
-                    canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="orange4", tag="block")
-                if mino[j] == 7:
-                    canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="purple4", tag="block")
+                if maps[x[k]][y[k]] == 0:
+                    base_x = 640 - size * 6 + x[k]*size
+                    if mino[j] == 9:
+                        canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="black4", tag="block")
+                    if mino[j] == 0:
+                        canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="gray4", tag="block")
+                    if mino[j] == 1:
+                        canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="skyblue4", tag="block")
+                    if mino[j] == 2:
+                        canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="yellow4", tag="block")
+                    if mino[j] == 3:
+                        canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="green4", tag="block")
+                    if mino[j] == 4:
+                        canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="red4", tag="block")
+                    if mino[j] == 5:
+                        canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="blue4", tag="block")
+                    if mino[j] == 6:
+                        canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="orange4", tag="block")
+                    if mino[j] == 7:
+                        canvas.create_rectangle(base_x, y[k]*size, base_x + size, y[k]*size + size, fill="purple4", tag="block")
         except:
             a = 0
         canvas.update()
