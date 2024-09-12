@@ -307,46 +307,6 @@ def erase():
             for j in range(len(tates)):
                 map1.append(tates[j][i])
             maps.append(map1)
-def rotate_L():
-    global mino1, mino2, mino3, mino4, maps, minor, mino
-    try:
-        if maps[mino1[0]][mino1[1]] != 2:
-            maps[mino1[0]][mino1[1]] = 0
-            maps[mino2[0]][mino2[1]] = 0
-            maps[mino3[0]][mino3[1]] = 0
-            maps[mino4[0]][mino4[1]] = 0
-            mino1_sa_x, mino1_sa_y = mino1[0] - minor[0], mino1[1] - minor[1]
-            mino2_sa_x, mino2_sa_y = mino2[0] - minor[0], mino2[1] - minor[1]
-            mino3_sa_x, mino3_sa_y = mino3[0] - minor[0], mino3[1] - minor[1]
-            mino4_sa_x, mino4_sa_y = mino4[0] - minor[0], mino4[1] - minor[1]
-            if maps[minor[0] - mino1_sa_y][minor[1] + mino1_sa_x] == 0 and maps[minor[0] - mino2_sa_y][minor[1] + mino2_sa_x] == 0 and maps[minor[0] - mino3_sa_y][minor[1] + mino3_sa_x] == 0 and maps[minor[0] - mino4_sa_y][minor[1] + mino4_sa_x] == 0:
-                mino1[0], mino1[1] = minor[0] - mino1_sa_y, minor[1] + mino1_sa_x
-                mino2[0], mino2[1] = minor[0] - mino2_sa_y, minor[1] + mino2_sa_x
-                mino3[0], mino3[1] = minor[0] - mino3_sa_y, minor[1] + mino3_sa_x
-                mino4[0], mino4[1] = minor[0] - mino4_sa_y, minor[1] + mino4_sa_x
-                byouga(mino1, mino2, mino3, mino4, maps_kotei)
-    except:
-        a = 0
-def rotate_R():
-    global mino1, mino2, mino3, mino4, maps, minor, mino
-    try:
-        if maps[mino1[0]][mino1[1]] != 2:
-            maps[mino1[0]][mino1[1]] = 0
-            maps[mino2[0]][mino2[1]] = 0
-            maps[mino3[0]][mino3[1]] = 0
-            maps[mino4[0]][mino4[1]] = 0
-            mino1_sa_x, mino1_sa_y = mino1[0] - minor[0], mino1[1] - minor[1]
-            mino2_sa_x, mino2_sa_y = mino2[0] - minor[0], mino2[1] - minor[1]
-            mino3_sa_x, mino3_sa_y = mino3[0] - minor[0], mino3[1] - minor[1]
-            mino4_sa_x, mino4_sa_y = mino4[0] - minor[0], mino4[1] - minor[1]
-        if maps[minor[0] + mino1_sa_y][minor[1] - mino1_sa_x] == 0 and maps[minor[0] + mino2_sa_y][minor[1] - mino2_sa_x] == 0 and maps[minor[0] + mino3_sa_y][minor[1] - mino3_sa_x] == 0 and maps[minor[0] + mino4_sa_y][minor[1] - mino4_sa_x] == 0:
-            mino1[0], mino1[1] = minor[0] + mino1_sa_y, minor[1] - mino1_sa_x
-            mino2[0], mino2[1] = minor[0] + mino2_sa_y, minor[1] - mino2_sa_x
-            mino3[0], mino3[1] = minor[0] + mino3_sa_y, minor[1] - mino3_sa_x
-            mino4[0], mino4[1] = minor[0] + mino4_sa_y, minor[1] - mino4_sa_x
-            byouga(mino1, mino2, mino3, mino4, maps_kotei)
-    except:
-        a = 0
 def hold():
     global maps, hold_mino, i, mino, mino1, mino2, mino3, mino4, holding, break_
     break_ = 1
@@ -409,7 +369,7 @@ while True:
                 mino.append(mino_[j])
         if break_ != 1:
             maps_kotei = maps.copy()
-            root.after(20, byouga(mino1, mino2, mino3, mino4, maps_kotei))
+            root.after(0, byouga(mino1, mino2, mino3, mino4, maps_kotei))
             maps_kotei = maps.copy()
             root.after(20, byouga(mino1, mino2, mino3, mino4, maps_kotei))
         break_ = 0
@@ -531,9 +491,51 @@ while True:
                 maps[mino3[0]][mino3[1]] = mino[i]
                 maps[mino4[0]][mino4[1]] = mino[i]
             if key == "z" and key != before_key:
-                rotate_R()
+                try:
+                    if maps[mino1[0]][mino1[1]] != 2:
+                        maps[mino1[0]][mino1[1]] = 0
+                        maps[mino2[0]][mino2[1]] = 0
+                        maps[mino3[0]][mino3[1]] = 0
+                        maps[mino4[0]][mino4[1]] = 0
+                        mino1_sa_x, mino1_sa_y = mino1[0] - minor[0], mino1[1] - minor[1]
+                        mino2_sa_x, mino2_sa_y = mino2[0] - minor[0], mino2[1] - minor[1]
+                        mino3_sa_x, mino3_sa_y = mino3[0] - minor[0], mino3[1] - minor[1]
+                        mino4_sa_x, mino4_sa_y = mino4[0] - minor[0], mino4[1] - minor[1]
+                    if maps[minor[0] + mino1_sa_y][minor[1] - mino1_sa_x] == 0 and maps[minor[0] + mino2_sa_y][minor[1] - mino2_sa_x] == 0 and maps[minor[0] + mino3_sa_y][minor[1] - mino3_sa_x] == 0 and maps[minor[0] + mino4_sa_y][minor[1] - mino4_sa_x] == 0 and mino[i] != 2:
+                        mino1[0], mino1[1] = minor[0] + mino1_sa_y, minor[1] - mino1_sa_x
+                        mino2[0], mino2[1] = minor[0] + mino2_sa_y, minor[1] - mino2_sa_x
+                        mino3[0], mino3[1] = minor[0] + mino3_sa_y, minor[1] - mino3_sa_x
+                        mino4[0], mino4[1] = minor[0] + mino4_sa_y, minor[1] - mino4_sa_x
+                        byouga(mino1, mino2, mino3, mino4, maps_kotei)
+                    if mino[i] != 2:
+                        maps[mino1[0]][mino1[1]] = mino[i]
+                        maps[mino2[0]][mino2[1]] = mino[i]
+                        maps[mino3[0]][mino3[1]] = mino[i]
+                        maps[mino4[0]][mino4[1]] = mino[i]
+                except:
+                    a = 0
             if key == "x" and key != before_key:
-                rotate_L()
+                try:
+                    if maps[mino1[0]][mino1[1]] != 2:
+                        maps[mino1[0]][mino1[1]] = 0
+                        maps[mino2[0]][mino2[1]] = 0
+                        maps[mino3[0]][mino3[1]] = 0
+                        maps[mino4[0]][mino4[1]] = 0
+                        mino1_sa_x, mino1_sa_y = mino1[0] - minor[0], mino1[1] - minor[1]
+                        mino2_sa_x, mino2_sa_y = mino2[0] - minor[0], mino2[1] - minor[1]
+                        mino3_sa_x, mino3_sa_y = mino3[0] - minor[0], mino3[1] - minor[1]
+                        mino4_sa_x, mino4_sa_y = mino4[0] - minor[0], mino4[1] - minor[1]
+                        if maps[minor[0] - mino1_sa_y][minor[1] + mino1_sa_x] == 0 and maps[minor[0] - mino2_sa_y][minor[1] + mino2_sa_x] == 0 and maps[minor[0] - mino3_sa_y][minor[1] + mino3_sa_x] == 0 and maps[minor[0] - mino4_sa_y][minor[1] + mino4_sa_x] == 0:
+                            mino1[0], mino1[1] = minor[0] - mino1_sa_y, minor[1] + mino1_sa_x
+                            mino2[0], mino2[1] = minor[0] - mino2_sa_y, minor[1] + mino2_sa_x
+                            mino3[0], mino3[1] = minor[0] - mino3_sa_y, minor[1] + mino3_sa_x
+                            mino4[0], mino4[1] = minor[0] - mino4_sa_y, minor[1] + mino4_sa_x
+                        maps[mino1[0]][mino1[1]] = mino[i]
+                        maps[mino2[0]][mino2[1]] = mino[i]
+                        maps[mino3[0]][mino3[1]] = mino[i]
+                        maps[mino4[0]][mino4[1]] = mino[i]
+                except:
+                    a = 0
             if key == "c" and key != before_key:
                 break_ = 0
                 hold()
